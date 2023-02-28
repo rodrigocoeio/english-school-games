@@ -8,7 +8,7 @@ dotenv.config();
 
 const runServer = async (runningGames: GameConfigs[]) => {
   const server = express();
-  const port = process.env.PORT;
+  const port = process.env.PORT || 81;
   if (port) {
     server.use("/", (req, res) => res.json(runningGames));
     server.listen(port, () => {
