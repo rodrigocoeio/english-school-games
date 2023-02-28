@@ -1,15 +1,9 @@
-import express from "express";
 import dotenv from "dotenv";
+import createGameServer, { GameConfigs } from "./game-server";
+import games from "./configs/games.json";
 
 dotenv.config();
 
-const app = express();
-const port = process.env.PORT;
-
-app.get("/", (req, res) => {
-  res.send("Express + TypeScript Server");
-});
-
-app.listen(port, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
+games.map((gameConfigs: GameConfigs) => {
+  createGameServer(gameConfigs);
 });

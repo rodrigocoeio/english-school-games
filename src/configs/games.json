@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Treasure Hunt",
+        "path": "../treasurehunt/dist",
+        "port": 88
+    },
+    {
+        "name": "Guess What",
+        "path": "../guesswhat/dist",
+        "port": 89
+    }
+]
