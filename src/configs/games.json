@@ -1,37 +1,44 @@
 [
     {
         "name": "Treasure Hunt",
-        "path": "../treasurehunt",
+        "path": "./games/treasurehunt",
+        "repository": "https://github.com/rodrigocoeio/treasurehunt.git",
         "port": 89
     },
     {
         "name": "Guess What",
-        "path": "../guesswhat",
+        "path": "./games/guesswhat",
+        "repository": "https://github.com/rodrigocoeio/guesswhat.git",
         "port": 88
     },
     {
         "name": "Flash Learning",
-        "path": "../flashlearning",
+        "path": "./games/flashlearning",
+        "repository": "https://github.com/rodrigocoeio/flashlearning.git",
         "port": 90
     },
     {
         "name": "Hide & Seek",
-        "path": "../hideandseek",
+        "path": "./games/hideandseek",
+        "repository": "https://github.com/rodrigocoeio/hideandseek.git",
         "port": 91
     },
     {
         "name": "What Am I",
-        "path": "../whatami",
+        "path": "./games/whatami",
+        "repository": "https://github.com/rodrigocoeio/whatami.git",
         "port": 92
     },
     {
         "name": "Secret Words",
-        "path": "../secretwords",
+        "path": "./games/secretwords",
+        "repository": "https://github.com/rodrigocoeio/secretwords.git",
         "port": 93
     },
     {
         "name": "Grammar Structure",
-        "path": "../grammarstructure",
+        "path": "./games/grammarstructure",
+        "repository": "https://github.com/rodrigocoeio/grammarstructure.git",
         "port": 94
     }
 ]
