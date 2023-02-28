@@ -1,12 +1,37 @@
 [
     {
         "name": "Treasure Hunt",
-        "path": "../treasurehunt/dist",
-        "port": 88
+        "path": "../treasurehunt",
+        "port": 89
     },
     {
         "name": "Guess What",
-        "path": "../guesswhat/dist",
-        "port": 89
+        "path": "../guesswhat",
+        "port": 88
+    },
+    {
+        "name": "Flash Learning",
+        "path": "../flashlearning",
+        "port": 90
+    },
+    {
+        "name": "Hide & Seek",
+        "path": "../hideandseek",
+        "port": 91
+    },
+    {
+        "name": "What Am I",
+        "path": "../whatami",
+        "port": 92
+    },
+    {
+        "name": "Secret Words",
+        "path": "../secretwords",
+        "port": 93
+    },
+    {
+        "name": "Grammar Structure",
+        "path": "../grammarstructure",
+        "port": 94
     }
 ]

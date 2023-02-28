@@ -1,16 +1,12 @@
 import express from "express";
 import path from "path";
-
-export interface GameConfigs {
-  name: string;
-  path: string;
-  port: number;
-}
+import GameConfigs from "./game-configs";
 
 const createGameServer = (gameConfigs: GameConfigs) => {
   const gameServer = express();
+  const gamePath = path.resolve(gameConfigs.path + "/dist");
 
-  gameServer.use("/", express.static(path.resolve(gameConfigs.path)));
+  gameServer.use("/", express.static(gamePath));
 
   gameServer.listen(gameConfigs.port, () => {
     console.log(
