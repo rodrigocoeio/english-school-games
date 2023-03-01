@@ -1,0 +1,21 @@
+html,
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.Games {
+    margin: 30px;
+    text-align: center;
+}
+
+.Game {
+    margin: 15px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+}
+
+.Game[disabled] {
+    opacity: 0.3;
+    cursor: not-allowed;
+}

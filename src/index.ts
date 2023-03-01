@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import GameConfigs from "./interfaces/game-configs";
 import gamesConfigs from "./configs/games.json";
 import createGameServer from "./scripts/game-server";
+import path from "path";
 
 dotenv.config();
 
@@ -10,7 +11,9 @@ const runServer = async (runningGames: GameConfigs[]) => {
   const server = express();
   const port = process.env.PORT || 81;
   if (port) {
-    server.use("/", (req, res) => res.json(runningGames));
+    const publicPath = path.resolve("./public");
+    server.use("/games", (req, res) => res.json(runningGames));
+    server.use("/", express.static(publicPath));
     server.listen(port, () => {
       console.log(
         `⚡️ [server]: server is running at http://localhost:${port}`
