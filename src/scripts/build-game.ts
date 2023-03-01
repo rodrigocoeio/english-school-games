@@ -6,13 +6,13 @@ const buildGame = (gameConfigs: GameConfigs, logs: boolean = false) => {
   return new Promise((resolveFunc) => {
     console.log("🛠️  Building " + gameConfigs.name + " game...");
 
-    const gamePath = path.resolve(gameConfigs.path);
+    const gamesPath = process.env.GAMES_PATH || "./games";
+    const gamePath = path.resolve(gamesPath + gameConfigs.path);
     const buildProcess = spawn("npm.cmd", ["run", "build"], { cwd: gamePath });
 
-    const throwBuildError = (error:any) => {
+    const throwBuildError = (error: any) => {
       console.error("❌ Error building " + gameConfigs.name + "!");
-      if(logs)
-        console.error(error);
+      if (logs) console.error(error);
       resolveFunc(false);
     };
 
@@ -23,8 +23,7 @@ const buildGame = (gameConfigs: GameConfigs, logs: boolean = false) => {
       if (logs) process.stderr.write(data.toString());
     });
     buildProcess.on("exit", (code) => {
-      if(code!==0)
-        return throwBuildError(code);
+      if (code !== 0) return throwBuildError(code);
 
       console.log("✅ Game Built: " + gameConfigs.name + "!");
       resolveFunc(true);

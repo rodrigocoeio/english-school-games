@@ -3,7 +3,8 @@ import path from "path";
 import { spawn } from "child_process";
 
 const installGame = (gameConfigs: GameConfigs, logs: boolean = false) => {
-  const gamesPath = path.resolve("./games");
+  let gamesPath = process.env.GAMES_PATH || "./games";
+  gamesPath = path.resolve(gamesPath);
   const gameRepository = gameConfigs.repository;
 
   return new Promise((resolveFunc) => {

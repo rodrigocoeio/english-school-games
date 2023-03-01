@@ -7,7 +7,9 @@ const createGameServer = (gameConfigs: GameConfigs) => {
   return new Promise((resolveFunc) => {
     try {
       const gameServer = express();
-      const gamePath = path.resolve(gameConfigs.path + "/dist");
+
+      const gamesPath = process.env.GAMES_PATH || "./games";
+      const gamePath = path.resolve(gamesPath + gameConfigs.path + "/dist");
 
       if(!fs.existsSync(gamePath))
         throw new Error('Game built not found!');

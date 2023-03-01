@@ -1,6 +1,6 @@
 <div class="Games">
   <div v-for="game in games" class="Game" :disabled="!game.running" @click="openGame(game)">
       <img :src="'/images/' + game.image" height="128" />
-      <h1>{{ game.name }}</h1>
+      <h2>{{ game.name }}</h2>
   </div>
 </div>

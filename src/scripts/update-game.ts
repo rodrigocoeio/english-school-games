@@ -6,7 +6,8 @@ const updateGame = (gameConfigs: GameConfigs, logs: boolean = false) => {
   return new Promise((resolveFunc) => {
     console.log("🔄  Updating " + gameConfigs.name + " game...");
 
-    const gamePath = path.resolve(gameConfigs.path);
+    const gamesPath = process.env.GAMES_PATH || "./games";
+    const gamePath = path.resolve(gamesPath + gameConfigs.path);
     const updateProcess = spawn("git", ["pull"], { cwd: gamePath });
 
     const throwUpdateError = (error:any) => {
