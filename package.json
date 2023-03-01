@@ -4,10 +4,9 @@
   "description": "English School Games Portal",
   "main": "index.js",
   "scripts": {
-    "install": "npx tsc && node dist/install-games.js",
-    "update": "npx tsc && node dist/update-games.js",
+    "install": "npx tsc && node dist/install-games.js && node dist/build-games.js",
+    "update": "npx tsc && node dist/update-games.js && node dist/build-games.js",
     "build": "npx tsc && node dist/update-games.js && node dist/build-games.js",
-    "all": "npx tsc && node dist/install-games.js && node dist/update-games.js && node dist/build-games.js && node dist/index.js",
     "start": "npx tsc && node dist/index.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
   },
