@@ -1,0 +1,4 @@
+/daemon
+/node_modules
+/dist
+.env

@@ -1,0 +1,28 @@
+html,
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.Games {
+    margin: 5px;
+    text-align: center;
+}
+
+.Game {
+    margin: 5px;
+    padding: 15px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    border: 5px solid white;
+    border-radius: 30px;
+}
+
+.Game[disabled=false]:hover {
+    border: 5px solid black;
+}
+
+.Game[disabled=true] {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
