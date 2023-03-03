@@ -1,48 +1,52 @@
 import GameConfigs from "../interfaces/game-configs";
 import path from "path";
-import { spawn } from "child_process";
+import { spawnSync } from "child_process";
+import fs from "fs";
 
 const installGame = (gameConfigs: GameConfigs, logs: boolean = false) => {
-  let gamesPath = process.env.GAMES_PATH || "./games";
-  gamesPath = path.resolve(gamesPath);
-  const gameRepository = gameConfigs.repository;
+  console.log("🛠️  Installing " + gameConfigs.name + " game...");
 
-  return new Promise((resolveFunc) => {
-    console.log("🛠️  Installing " + gameConfigs.name + " game...");
+  try {
+    let gamesPath = process.env.GAMES_PATH || "./games";
+    gamesPath = path.resolve(gamesPath);
+    const gamePath = gamesPath + gameConfigs.path;
+    const gameRepository = gameConfigs.repository;
 
-    const installProcess = spawn("git", ["clone", gameRepository], {
+    if (logs) console.log("...clonning respository...");
+    const gitCloneProcess = spawnSync("git", ["clone", gameRepository], {
       cwd: gamesPath,
+      stdio: "pipe",
+      encoding: "utf-8",
     });
 
-    const throwInstallationError = (error: any) => {
-      console.error(error);
-      console.log("❌ Error installing " + gameConfigs.name + "!");
-      resolveFunc(false);
-    };
+    if (!fs.existsSync(gamePath)) {
+      throw gitCloneProcess.stderr;
+    }
 
-    installProcess.stdout.on("data", (data) => {
-      if (logs) process.stdout.write(data.toString());
-    });
-    installProcess.stderr.on("data", (data) => {
-      if (logs) process.stderr.write(data.toString());
-    });
+    const packageJson = gamePath + "/package.json";
+    if (!fs.existsSync(packageJson)) {
+      throw "package.json not found!";
+    }
 
-    installProcess.on("exit", (code) => {
-      const packagesInstallProcess = spawn("npm.cmd", ["install"], {
-        cwd: gameConfigs.path,
-      });
-
-      packagesInstallProcess.on("exit", (code) => {
-        if (code !== 0) return throwInstallationError(code);
-
-        console.log("✅ Game Installed: " + gameConfigs.name + "!");
-        resolveFunc(true);
-      });
-      packagesInstallProcess.on("error", throwInstallationError);
+    if (logs) console.log("...installing node packages...");
+    const npmInstallProcess = spawnSync("npm.cmd", ["install"], {
+      cwd: gamePath,
+      stdio: "pipe",
+      encoding: "utf-8",
     });
 
-    installProcess.on("error", throwInstallationError);
-  });
+    if (!fs.existsSync(gamePath + "/node_modules")) {
+      throw gitCloneProcess.stderr;
+    }
+
+    console.log("✅ Game Installed: " + gameConfigs.name + "!");
+
+    return true;
+  } catch (error) {
+    if (logs) console.error(error);
+    console.log("❌ Error installing " + gameConfigs.name + "!");
+    return false;
+  }
 };
 
 export default installGame;

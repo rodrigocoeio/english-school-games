@@ -3,8 +3,6 @@ export default interface GameConfigs {
   path: string;
   port: number;
   repository: string;
-  href?: string;  
-  installed?: boolean;
-  built?: boolean;
+  href?: string;
   running?: boolean;
 }

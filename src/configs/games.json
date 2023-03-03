@@ -1,17 +1,24 @@
 [
     {
+        "name": "Memory Game",
+        "path": "/memorygame",
+        "image": "memorygame.jpg",
+        "repository": "https://github.com/rodrigocoeio/memorygame.git",
+        "port": 87
+    },
+    {
         "name": "Treasure Hunt",
         "path": "/treasurehunt",
         "image": "treasurehunt.jpg",
         "repository": "https://github.com/rodrigocoeio/treasurehunt.git",
-        "port": 89
+        "port": 88
     },
     {
         "name": "Guess What",
         "path": "/guesswhat",
         "image": "guesswhat.jpg",
         "repository": "https://github.com/rodrigocoeio/guesswhat.git",
-        "port": 88
+        "port": 89
     },
     {
         "name": "Flash Learning",
