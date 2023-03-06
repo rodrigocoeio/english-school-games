@@ -1,21 +1,34 @@
 html,
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 100%;
+    margin: 0px;
+}
+
+#app {
+    height: 100%;
 }
 
 .Games {
-    margin: 5px;
+    height: calc(100% - 60px);
     text-align: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    grid-auto-rows: auto;
+    padding: 30px;
 }
 
 .Game {
-    margin: 5px;
     padding: 15px;
-    display: inline-block;
+    display: block;
     text-align: center;
     cursor: pointer;
     border: 5px solid white;
     border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .Game[disabled=false]:hover {

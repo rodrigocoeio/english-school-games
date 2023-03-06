@@ -19,13 +19,23 @@ const createGameServer = (gameConfigs: GameConfigs) => {
       gameServer.use("/", express.static(gameDistPath));
 
       const cardsPath = path.resolve(gamePath + "/public/cards");
-      const categoriesJsonPath = path.resolve(
+      if (fs.existsSync(cardsPath)) {
+        gameServer.use("/cards", express.static(cardsPath));
+      }
+
+      const storeCategoriesJsonPath = path.resolve(
         gamePath + "/src/stores/categories.json"
       );
-      if (fs.existsSync(cardsPath) && fs.existsSync(categoriesJsonPath)) {
-        gameServer.use("/cards", express.static(cardsPath));
+      const publicCategoriesJsonPath = path.resolve(
+        gamePath + "/public/categories.json"
+      );
+      const categoriesJsonPath = fs.existsSync(storeCategoriesJsonPath)
+        ? storeCategoriesJsonPath
+        : publicCategoriesJsonPath;
+
+      if (fs.existsSync(categoriesJsonPath)) {
         gameServer.use("/categories.json", (req, res) => {
-          spawnSync("node", ["readcards.js"], {
+          spawnSync("npm", ["run", "readcards"], {
             cwd: gamePath,
           });
 

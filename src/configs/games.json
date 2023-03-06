@@ -1,12 +1,5 @@
 [
     {
-        "name": "Memory Game",
-        "path": "/memorygame",
-        "image": "memorygame.jpg",
-        "repository": "https://github.com/rodrigocoeio/memorygame.git",
-        "port": 87
-    },
-    {
         "name": "Treasure Hunt",
         "path": "/treasurehunt",
         "image": "treasurehunt.jpg",
@@ -54,5 +47,12 @@
         "image": "grammarstructure.png",
         "repository": "https://github.com/rodrigocoeio/grammarstructure.git",
         "port": 94
+    },
+    {
+        "name": "Memory Game",
+        "path": "/memorygame",
+        "image": "memorygame.png",
+        "repository": "https://github.com/rodrigocoeio/memorygame.git",
+        "port": 99
     }
 ]
