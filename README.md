@@ -1,14 +1,23 @@
 # ENGLISH SCHOOL SERVER #
 
-# Commands:
-# npm run install - install/build all game repositories under /games
-# npm run update - update/build all games
-# npm run build - update/build all games
-# npm run start - start all games
+# Games Commands:
+# install all game repositories under /games
+npm run games install
+# update all games
+npm run games update
+# build all games
+npm run games build
+# start all games
+npm run start
 
-# Windows Service Commands:
-# npm run service install - install windows service
-# npm run service uninstall - uninstall windows service
-# npm run service start - start windows service
-# npm run service stop - stop windows service
-# npm run service restart - restart windows service
+# Windows Service Commands (run in the background):
+# install windows service:
+npm run service install
+# uninstall windows service
+npm run service uninstall
+# start windows service
+npm run service start
+# stop windows service
+npm run service stop
+# restart windows service
+npm run service restart

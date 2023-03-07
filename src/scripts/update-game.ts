@@ -1,37 +1,30 @@
 import GameConfigs from "../interfaces/game-configs";
 import path from "path";
-import { spawn } from "child_process";
+import { spawnSync } from "child_process";
+import fs from "fs";
 
 const updateGame = (gameConfigs: GameConfigs, logs: boolean = false) => {
-  return new Promise((resolveFunc) => {
-    console.log("🔄  Updating " + gameConfigs.name + " game...");
+  console.log("🔄  Updating " + gameConfigs.name + " game...");
 
+  try {
     const gamesPath = process.env.GAMES_PATH || "./games";
     const gamePath = path.resolve(gamesPath + gameConfigs.path);
-    const updateProcess = spawn("git", ["pull"], { cwd: gamePath });
 
-    const throwUpdateError = (error:any) => {
-      console.error("❌ Error updating " + gameConfigs.name + "!");
-      if(logs)
-        console.error(error);
-      resolveFunc(false);
-    };
+    if (!fs.existsSync(gamePath)) {
+      throw "game folder not found!";
+    }
 
-    updateProcess.stdout.on("data", (data) => {
-      if (logs) process.stdout.write(data.toString());
+    const updateProcess = spawnSync("git", ["pull"], {
+      cwd: gamePath,
+      stdio: "pipe",
+      encoding: "utf-8",
     });
-    updateProcess.stderr.on("data", (data) => {
-      if (logs) process.stderr.write(data.toString());
-    });
-    updateProcess.on("exit", (code) => {
-      if(code!==0)
-        return throwUpdateError(code);
 
-      console.log("✅ Game Updated: " + gameConfigs.name + "!");
-      resolveFunc(true);
-    });
-    updateProcess.on("error", throwUpdateError);
-  });
+    console.log("✅ Game Updated: " + gameConfigs.name + "!");
+  } catch (error) {
+    console.error("❌ Error updating " + gameConfigs.name + "!");
+    if (logs) console.error(error);
+  }
 };
 
 export default updateGame;

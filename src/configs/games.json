@@ -4,14 +4,14 @@
         "path": "/treasurehunt",
         "image": "treasurehunt.jpg",
         "repository": "https://github.com/rodrigocoeio/treasurehunt.git",
-        "port": 89
+        "port": 88
     },
     {
         "name": "Guess What",
         "path": "/guesswhat",
         "image": "guesswhat.jpg",
         "repository": "https://github.com/rodrigocoeio/guesswhat.git",
-        "port": 88
+        "port": 89
     },
     {
         "name": "Flash Learning",
@@ -47,5 +47,12 @@
         "image": "grammarstructure.png",
         "repository": "https://github.com/rodrigocoeio/grammarstructure.git",
         "port": 94
+    },
+    {
+        "name": "Memory Game",
+        "path": "/memorygame",
+        "image": "memorygame.png",
+        "repository": "https://github.com/rodrigocoeio/memorygame.git",
+        "port": 99
     }
 ]

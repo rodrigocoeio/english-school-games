@@ -1,35 +1,34 @@
 import GameConfigs from "../interfaces/game-configs";
 import path from "path";
-import { spawn } from "child_process";
+import { spawnSync } from "child_process";
+import fs from "fs";
 
 const buildGame = (gameConfigs: GameConfigs, logs: boolean = false) => {
-  return new Promise((resolveFunc) => {
+  try {
     console.log("🛠️  Building " + gameConfigs.name + " game...");
 
     const gamesPath = process.env.GAMES_PATH || "./games";
     const gamePath = path.resolve(gamesPath + gameConfigs.path);
-    const buildProcess = spawn("npm.cmd", ["run", "build"], { cwd: gamePath });
+    const packageJson = gamePath + "/package.json";
+    if (!fs.existsSync(packageJson)) {
+      throw "package.json not found!";
+    }
 
-    const throwBuildError = (error: any) => {
-      console.error("❌ Error building " + gameConfigs.name + "!");
-      if (logs) console.error(error);
-      resolveFunc(false);
-    };
+    const buildProcess = spawnSync("npm.cmd", ["run", "build"], {
+      cwd: gamePath,
+      stdio: "pipe",
+      encoding: "utf-8",
+    });
 
-    buildProcess.stdout.on("data", (data) => {
-      if (logs) process.stdout.write(data.toString());
-    });
-    buildProcess.stderr.on("data", (data) => {
-      if (logs) process.stderr.write(data.toString());
-    });
-    buildProcess.on("exit", (code) => {
-      if (code !== 0) return throwBuildError(code);
+    if (!fs.existsSync(gamePath + "/dist")) {
+      throw buildProcess.stderr;
+    }
 
-      console.log("✅ Game Built: " + gameConfigs.name + "!");
-      resolveFunc(true);
-    });
-    buildProcess.on("error", throwBuildError);
-  });
+    console.log("✅ Game Built: " + gameConfigs.name + "!");
+  } catch (error) {
+    console.error("❌ Error building " + gameConfigs.name + "!");
+    if (logs) console.error(error);
+  }
 };
 
 export default buildGame;
