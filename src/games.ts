@@ -1,9 +1,11 @@
+import dotenv from "dotenv";
 import GameConfigs from "./interfaces/game-configs";
 import gamesConfigs from "./configs/games.json";
 import installGame from "./scripts/install-game";
 import updateGame from "./scripts/update-game";
 import buildGame from "./scripts/build-game";
 
+dotenv.config();
 const action: string = process.argv[2];
 
 switch (action) {
