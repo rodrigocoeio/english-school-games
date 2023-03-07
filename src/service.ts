@@ -1,6 +1,8 @@
+import dotenv from "dotenv";
 import path from "path";
 import Service from "node-windows";
 
+dotenv.config();
 const action: string = process.argv[2];
 
 // Create a new service object
