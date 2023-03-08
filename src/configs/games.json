@@ -2,7 +2,7 @@
     {
         "name": "Treasure Hunt",
         "path": "/treasurehunt",
-        "image": "treasurehunt.jpg",
+        "image": "treasurehunt.png",
         "repository": "https://github.com/rodrigocoeio/treasurehunt.git",
         "port": 88
     },
