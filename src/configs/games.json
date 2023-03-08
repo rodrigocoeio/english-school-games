@@ -35,7 +35,7 @@
         "port": 92
     },
     {
-        "name": "Secret Words",
+        "name": "Secret Words, Phrases",
         "path": "/secretwords",
         "image": "secretwords.png",
         "repository": "https://github.com/rodrigocoeio/secretwords.git",
