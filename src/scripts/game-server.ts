@@ -12,39 +12,35 @@ const createGameServer = (gameConfigs: GameConfigs) => {
       const gamesPath = process.env.GAMES_PATH || "./games";
       const gamePath = path.resolve(gamesPath + gameConfigs.path);
       const gameDistPath = path.resolve(gamesPath + gameConfigs.path + "/dist");
+      const gameCardsPath = path.resolve(gamePath + "/cards");
+      const gameCategoriesJsonPath = path.resolve(
+        gameCardsPath + "/categories.json"
+      );
 
       if (!fs.existsSync(gameDistPath))
         throw new Error("Game built not found!");
 
-      const cardsPath = path.resolve(gamePath + "/public/cards");
-      if (fs.existsSync(cardsPath)) {
-        gameServer.use("/cards", express.static(cardsPath));
-      }
-
-      const storeCategoriesJsonPath = path.resolve(
-        gamePath + "/src/stores/categories.json"
-      );
-      const publicCategoriesJsonPath = path.resolve(
-        gamePath + "/public/categories.json"
-      );
-      const categoriesJsonPath = fs.existsSync(storeCategoriesJsonPath)
-        ? storeCategoriesJsonPath
-        : publicCategoriesJsonPath;
-
-      if (fs.existsSync(categoriesJsonPath)) {
-        gameServer.use("/categories.json", (req, res) => {
+      if (fs.existsSync(gameCategoriesJsonPath)) {
+        gameServer.get("/cards/categories.json", (req, res) => {
           if (fs.existsSync(gamePath + "/readcards.js"))
-            spawnSync("node", ["readcards.js"], {
+            spawnSync("node", ["readcards.js", "./cards"], {
               cwd: gamePath,
             });
           if (fs.existsSync(gamePath + "/readcards.cjs"))
-            spawnSync("node", ["readcards.cjs"], {
+            spawnSync("node", ["readcards.cjs", "./cards"], {
               cwd: gamePath,
             });
 
-          const categoriesJson = fs.readFileSync(categoriesJsonPath, "utf8");
+          const categoriesJson = fs.readFileSync(
+            gameCategoriesJsonPath,
+            "utf8"
+          );
           return res.json(JSON.parse(categoriesJson));
         });
+      }
+
+      if (fs.existsSync(gameCardsPath)) {
+        gameServer.use("/cards", express.static(gameCardsPath));
       }
 
       gameServer.use("/", express.static(gameDistPath));
