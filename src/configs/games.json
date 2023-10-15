@@ -54,5 +54,12 @@
         "image": "memorygame.png",
         "repository": "https://github.com/rodrigocoeio/memorygame.git",
         "port": 99
+    },
+    {
+        "name": "The Quiz Game",
+        "path": "/quizgame",
+        "image": "quizgame.png",
+        "repository": "https://github.com/rodrigocoeio/quizgame.git",
+        "port": 82
     }
 ]
